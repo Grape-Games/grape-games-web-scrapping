@@ -11,6 +11,7 @@ class ScrapDetail extends Model
     use HasFactory, UUIDTrait;
     protected $fillable = [
         'url',
+        'details',
         'dated'
     ];
 }

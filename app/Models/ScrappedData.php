@@ -20,8 +20,8 @@ class ScrappedData extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function details(): BelongsTo
+    public function info(): BelongsTo
     {
-        return $this->belongsTo(ScrapDetail::class);
+        return $this->belongsTo(ScrapDetail::class, 'scrap_detail_id', 'id');
     }
 }

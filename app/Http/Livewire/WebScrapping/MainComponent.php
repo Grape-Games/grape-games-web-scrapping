@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\WebScrapping;
 
+use App\Models\ScrappedData;
 use App\Services\PetrolPricesScrappingService;
 use App\Traits\EventDispatchMessages;
 use Exception;
@@ -9,11 +10,11 @@ use Livewire\Component;
 use Goutte\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-
+use Livewire\WithPagination;
 
 class MainComponent extends Component
 {
-    use EventDispatchMessages;
+    use EventDispatchMessages, WithPagination;
     public $url;
 
     protected $rules = [
@@ -57,6 +58,8 @@ class MainComponent extends Component
     }
     public function render()
     {
-        return view('livewire.web-scrapping.main-component');
+        return view('livewire.web-scrapping.main-component', [
+            'datas' => ScrappedData::paginate(10),
+        ]);
     }
 }

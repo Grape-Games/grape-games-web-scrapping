@@ -39,8 +39,9 @@ class PetrolPricesScrappingService
     {
         $date = trim(self::get_string_between($data['dated'][0], ",", "("));
         $create = ScrapDetail::firstOrCreate([
-            'url' => $url,
+            'details' => $data['dated'][0],
             'dated' => Carbon::parse($date)->format('Y-m-d'),
+            'url' => $url,
         ]);
 
         foreach ($data['countries'] as $key => $country) {
