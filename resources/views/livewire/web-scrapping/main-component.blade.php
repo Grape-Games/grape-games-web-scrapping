@@ -23,7 +23,7 @@
         <thead>
             <tr>
                 <th scope="col">Country Name</th>
-                <th scope="col">Price</th>
+                <th scope="col">Price ( USD )</th>
                 <th scope="col">Type</th>
                 <th scope="col">Dated</th>
                 <th scope="col">URL</th>
@@ -33,7 +33,7 @@
             @forelse ($datas as $data)
                 <tr>
                     <td>{{ $data->country_name }}</td>
-                    <td>{{ $data->price }}</td>
+                    <td>{{ $data->price }} $</td>
                     <td>{{ $data->info->details }}</td>
                     <td>{{ $data->info->dated }}</td>
                     <td>{{ $data->info->url }}</td>
