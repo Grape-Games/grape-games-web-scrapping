@@ -39,7 +39,7 @@
                     <td>{{ $data->info->url }}</td>
                 </tr>
             @empty
-                <td colspan="4">No records found.</td>
+                <td class="text-center text-danger" colspan="5">No records found.</td>
             @endforelse
         </tbody>
     </table>
