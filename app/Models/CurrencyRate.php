@@ -15,6 +15,7 @@ class CurrencyRate extends Model
         'units_per_usd',
         'usd_per_unit',
         'dated',
+        'url',
         'scrapped_data_id',
     ];
 

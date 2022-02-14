@@ -27,6 +27,9 @@ class CurrenciesTable extends DataTableComponent
             Column::make('Dated', 'dated')
                 ->sortable()
                 ->searchable(),
+            Column::make('Website', 'url')
+                ->sortable()
+                ->searchable(),
         ];
     }
     public function query(): Builder

@@ -102,6 +102,8 @@ class PetrolPricesScrappingService
         foreach ($data['countries'] as $key => $country) {
             ScrappedData::updateOrCreate([
                 'country_name' => $country,
+            ], [
+                'country_name' => $country,
                 'price' => $data['prices'][$key],
                 'scrap_detail_id' => $create->id
             ]);
@@ -115,9 +117,13 @@ class PetrolPricesScrappingService
             CurrencyRate::updateOrCreate([
                 'country' => $currency['country'],
                 'symbol' => $currency['symbol'],
+            ], [
+                'country' => $currency['country'],
+                'symbol' => $currency['symbol'],
                 'units_per_usd' => $currency['units_per_usd'],
                 'usd_per_unit' => $currency['usd_per_unit'],
-                'dated' => $dated
+                'dated' => $dated,
+                'url' => $url
             ]);
         }
         return true;
