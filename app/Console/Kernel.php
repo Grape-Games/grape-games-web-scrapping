@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('scrap:both')->everyMinute()->sendOutputTo(base_path() . '/app/console/log.txt');
+        $schedule->command('scrap:both')->everyFiveMinutes()->sendOutputTo(base_path() . '/app/console/log.txt');
     }
 
     /**
