@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->exec('/usr/bin/php /home/innolgkl/scrapper.innovativeappstudio.website/grape-games-web-scrapping/artisan schedule:run')
+        $schedule->exec('/usr/bin/php /home/innolgkl/scrapper.innovativeappstudio.website/grape-games-web-scrapping/artisan scrap:both')
             ->withoutOverlapping()
             ->appendOutputTo(storage_path('logs') . '/cron-get_events.log'); //command('scrap:both')->everyMinute()->sendOutputTo(base_path() . '/app/console/log.txt');
     }
