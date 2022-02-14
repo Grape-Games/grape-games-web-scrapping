@@ -1,0 +1,1 @@
+Idle timeout reached for "https://www.globalpetrolprices.com/gasoline_prices/".
