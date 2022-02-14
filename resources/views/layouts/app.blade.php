@@ -12,7 +12,6 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 
@@ -36,10 +35,12 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     @livewireStyles
     @livewireScripts
+    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+        data-turbolinks-eval="false" data-turbo-eval="false"></script>
+
     @stack('extended-css')
 </head>
 
@@ -63,21 +64,8 @@
     <script>
         $(document).on('turbolinks:click', function() {
             console.log('clicked');
-            $('img')
-                .addClass('animated fadeOut')
-                .off('webkitAnimationEnd oanimationend msAnimationEnd animationend')
-        });
-        $(document).on('turbolinks:load', function(event) {
-            // if call was fired by turbolinks
-            if (event.originalEvent.data.timing.visitStart) {
-                $('img')
-                    .addClass('animated fadeIn')
-                    .one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
-                        $('img').removeClass('animated');
-                    });
-            } else {
-                $('img').removeClass('hide')
-            }
+            $('main')
+                .addClass('bx-tada');
         });
     </script>
     @stack('extended-js')

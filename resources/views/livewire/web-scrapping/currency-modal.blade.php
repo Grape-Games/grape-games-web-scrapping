@@ -12,8 +12,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div wire:ignore class="form-group mb-1 col-12">
-                        <select class="form-select select2" id="currencies" data-placeholder="Please select a value">
+                    <div class="form-group mb-1 col-12">
+                        <select class="form-select" id="currencies" data-placeholder="Please select a value"
+                            placeholder="Select the relevant country...">
                             <option value=""></option>
                             @forelse ($currencies as $currency)
                                 <option value="{{ $currency->id }}">
@@ -32,14 +33,14 @@
 @push('extended-js')
     <script>
         $(document).ready(function() {
-            $('#currencies').select2({
-                placeholder: $(this).data('placeholder'),
-                dropdownAutoWidth: true,
-                width: '100%',
-            });
             $("#currencies").change(function(e) {
                 e.preventDefault();
-                @this.finalTouch(e.target.value)
+                @this.finalTouch(e.target.value);
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                };
+                toastr.success('Successfully set the corresponding currency 😉');
 
             });
             Livewire.on('toggleModal', () => {
