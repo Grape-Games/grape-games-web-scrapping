@@ -15,7 +15,11 @@ use Livewire\WithPagination;
 class MainComponent extends Component
 {
     use EventDispatchMessages, WithPagination;
-    public $url;
+    public $url, $toUpdate;
+
+    protected $listeners = [
+        'mainTableUpdate' => '$refresh',
+    ];
 
     protected $rules = [
         'url' => 'required|url',
@@ -55,6 +59,11 @@ class MainComponent extends Component
             DB::rollBack();
             $this->emit('response-toast', $this->exceptionMessage($exception));
         }
+    }
+
+    public function emitUpdateEvent($id)
+    {
+        $this->emit('updateMyId', $id);
     }
     public function render()
     {

@@ -6,6 +6,16 @@ Livewire.on("response-toast", (event) => {
         closeButton: true,
         progressBar: true,
     };
-    var code = "toastr." + event.type + "('" + event.message + "')";
+    var quote = '"';
+    var code =
+        "toastr." +
+        event.type +
+        "(" +
+        quote +
+        "" +
+        event.message +
+        "" +
+        quote +
+        ")";
     eval(code);
 });

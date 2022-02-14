@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
 
@@ -24,8 +24,8 @@ Route::group([
     'as' => 'dashboard.'
 ], function () {
 
-    // one test route
-    Route::view('test', 'pages.test.index')->name('test');
+    // one curreny rates route
+    Route::view('currency-rates', 'pages.currency-rates.index')->name('currency-rates.index');
 });
 
 Route::get('/dashboard', function () {

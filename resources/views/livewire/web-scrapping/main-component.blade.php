@@ -24,6 +24,7 @@
             <tr>
                 <th scope="col">Country Name</th>
                 <th scope="col">Price ( USD )</th>
+                <th scope="col">Conversion Rate</th>
                 <th scope="col">Type</th>
                 <th scope="col">Dated</th>
                 <th scope="col">URL</th>
@@ -34,17 +35,27 @@
                 <tr>
                     <td>{{ $data->country_name }}</td>
                     <td>{{ $data->price }} $</td>
+                    <td>
+                        @isset($data->rate)
+                            {{ $data->rate->units_per_usd }}
+                        @else
+                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" type="button"
+                                class="bx-flashing badge badge-danger" data-toggle="modal"
+                                data-target="#exampleModalCenter">Click To Set Now</button>
+                        @endisset
+                    </td>
                     <td>{{ $data->info->details }}</td>
                     <td>{{ $data->info->dated }}</td>
                     <td>{{ $data->info->url }}</td>
                 </tr>
             @empty
-                <td class="text-center text-danger" colspan="5">No records found.</td>
+                <td class="text-center text-danger" colspan="6">No records found.</td>
             @endforelse
         </tbody>
     </table>
     {{ $datas->links() }}
 
+    @livewire('web-scrapping.currency-modal')
 </div>
 @once
     @push('extended-js')

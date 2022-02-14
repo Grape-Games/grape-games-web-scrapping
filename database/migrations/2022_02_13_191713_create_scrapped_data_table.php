@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('scrapped_data', function (Blueprint $table) {
+        Schema::create('scrapped_datas', function (Blueprint $table) {
             $table->id();
             $table->string('country_name');
             $table->string('price');
