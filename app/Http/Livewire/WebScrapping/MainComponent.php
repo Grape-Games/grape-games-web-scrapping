@@ -65,6 +65,7 @@ class MainComponent extends Component
     {
         $this->emit('updateMyId', $id);
     }
+
     public function render()
     {
         return view('livewire.web-scrapping.main-component', [
