@@ -39,10 +39,22 @@
                         @isset($data->rate)
                             {{ $data->rate->units_per_usd }} {{ $data->rate->symbol }}
                             <button wire:click="emitUpdateEvent('{{ $data->id }}')" wire:loading.attr="disabled"
-                                type="button" class="bx-flashing badge badge-info ml-2">Edit</button>
+                                wire:loading.remove type="button" class="bx-flashing badge badge-info ml-2"><i
+                                    class="fas fa-edit"></i>
+                            </button>
+                            <div class="bx-flashing badge badge-info ml-2" wire:loading
+                                wire:target="emitUpdateEvent('{{ $data->id }}')">
+                                Loading Please wait...
+                            </div>
                         @else
-                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" type="button"
-                                class="bx-flashing badge badge-danger">Click To Set Now</button>
+                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" wire:loading.attr="disabled"
+                                wire:loading.remove type="button" class="bx-flashing badge badge-danger ml-2"><i
+                                    class="fas fa-plus"></i>
+                            </button>
+                            <div class="bx-flashing badge badge-info ml-2" wire:loading
+                                wire:target="emitUpdateEvent('{{ $data->id }}')">
+                                Loading Please wait...
+                            </div>
                         @endisset
                     </td>
                     <td>{{ $data->info->details }}</td>
