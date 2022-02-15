@@ -64,6 +64,7 @@ class MainComponent extends Component
     public function emitUpdateEvent($id)
     {
         $this->emit('updateMyId', $id);
+        $this->emit('openModal');
     }
 
     public function render()

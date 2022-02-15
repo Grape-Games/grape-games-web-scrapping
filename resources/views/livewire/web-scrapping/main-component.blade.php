@@ -38,13 +38,11 @@
                     <td>
                         @isset($data->rate)
                             {{ $data->rate->units_per_usd }} {{ $data->rate->symbol }}
-                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" type="button"
-                                class="bx-flashing badge badge-info ml-2" data-toggle="modal"
-                                data-target="#exampleModalCenter">Edit</button>
+                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" wire:loading.attr="disabled"
+                                type="button" class="bx-flashing badge badge-info ml-2">Edit</button>
                         @else
                             <button wire:click="emitUpdateEvent('{{ $data->id }}')" type="button"
-                                class="bx-flashing badge badge-danger" data-toggle="modal"
-                                data-target="#exampleModalCenter">Click To Set Now</button>
+                                class="bx-flashing badge badge-danger">Click To Set Now</button>
                         @endisset
                     </td>
                     <td>{{ $data->info->details }}</td>
@@ -63,5 +61,10 @@
 @once
     @push('extended-js')
         <script src="{{ asset('js/front/web-scrapping/events.js') }}"></script>
+        <script>
+            Livewire.on('openModal', () => {
+                $(".modal").modal('show');
+            });
+        </script>
     @endpush
 @endonce
