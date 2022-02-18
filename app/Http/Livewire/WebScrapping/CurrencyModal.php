@@ -22,6 +22,7 @@ class CurrencyModal extends Component
             'currency_rate_id' => $value
         ]);
         $this->emit('toggleModal');
+        $this->emit('updateScrappedData');
     }
 
     public function render()

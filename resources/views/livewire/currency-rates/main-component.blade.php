@@ -1,7 +1,7 @@
 <div>
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-    <form wire:submit.prevent="scrapNow">
+    <form novalidate>
         <div class="form-group">
             <input wire:model.lazy="url" type="text" class="form-control @error('url') is-invalid @enderror"
                 placeholder="https://www.forex.pk/foreign-exchange-rate.htm"
@@ -16,7 +16,9 @@
             </h4>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary mt-2">Scrap Now</button>
+            <button wire:click.prevent="scrapNow" wire:loading.attr="disabled" type="button"
+                class="btn btn-primary mt-2">Scrap
+                Now</button>
         </div>
     </form>
 

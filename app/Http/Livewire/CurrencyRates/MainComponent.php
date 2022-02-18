@@ -42,6 +42,7 @@ class MainComponent extends Component
                     DB::commit();
 
                 $this->emit('response-toast', $this->successMessage("Scrapping was done successfully ✅", "✅"));
+                $this->emit('updateCurrenciesTable');
             }
         } catch (Exception $exception) {
             DB::rollBack();

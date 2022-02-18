@@ -1,7 +1,7 @@
 <div>
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-    <form wire:submit.prevent="scrapNow">
+    <form novalidate>
         <div class="form-group">
             <input wire:model.lazy="url" type="text" class="form-control @error('url') is-invalid @enderror"
                 placeholder="https://www.globalpetrolprices.com/gasoline_prices/"
@@ -16,57 +16,13 @@
             </h4>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary mt-2">Scrap Now</button>
+            <button wire:click.prevent="scrapNow" wire:loading.attr="disabled" type="button"
+                class="btn btn-primary mt-2">Scrap
+                Now</button>
         </div>
     </form>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Country Name</th>
-                <th scope="col">Price ( USD )</th>
-                <th scope="col">Conversion Rate</th>
-                <th scope="col">Type</th>
-                <th scope="col">Dated</th>
-                <th scope="col">URL</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse ($datas as $data)
-                <tr>
-                    <td>{{ $data->country_name }}</td>
-                    <td>{{ $data->price }} $</td>
-                    <td>
-                        @isset($data->rate)
-                            {{ $data->rate->units_per_usd }} {{ $data->rate->symbol }}
-                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" wire:loading.attr="disabled"
-                                wire:loading.remove type="button" class="bx-flashing badge badge-info ml-2"><i
-                                    class="fas fa-edit"></i>
-                            </button>
-                            <div class="bx-flashing badge badge-info ml-2" wire:loading
-                                wire:target="emitUpdateEvent('{{ $data->id }}')">
-                                Loading Please wait...
-                            </div>
-                        @else
-                            <button wire:click="emitUpdateEvent('{{ $data->id }}')" wire:loading.attr="disabled"
-                                wire:loading.remove type="button" class="bx-flashing badge badge-danger ml-2"><i
-                                    class="fas fa-plus"></i>
-                            </button>
-                            <div class="bx-flashing badge badge-info ml-2" wire:loading
-                                wire:target="emitUpdateEvent('{{ $data->id }}')">
-                                Loading Please wait...
-                            </div>
-                        @endisset
-                    </td>
-                    <td>{{ $data->info->details }}</td>
-                    <td>{{ $data->info->dated }}</td>
-                    <td>{{ $data->info->url }}</td>
-                </tr>
-            @empty
-                <td class="text-center text-danger" colspan="6">No records found.</td>
-            @endforelse
-        </tbody>
-    </table>
-    {{ $datas->links() }}
+
+    @livewire('scrapped-data-table')
 
     @livewire('web-scrapping.currency-modal')
 </div>

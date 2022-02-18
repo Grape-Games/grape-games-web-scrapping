@@ -17,10 +17,6 @@ class MainComponent extends Component
     use EventDispatchMessages, WithPagination;
     public $url, $toUpdate;
 
-    protected $listeners = [
-        'mainTableUpdate' => '$refresh',
-    ];
-
     protected $rules = [
         'url' => 'required|url',
     ];
@@ -51,6 +47,7 @@ class MainComponent extends Component
                     DB::commit();
 
                 $this->emit('response-toast', $this->successMessage("Scrapping was done successfully ✅", "✅"));
+                $this->emit('updateScrappedData');
             } else {
                 DB::rollBack();
                 throw ValidationException::withMessages(['URL' => 'Failed to set up the Goutte Client. 😞']);
@@ -61,16 +58,8 @@ class MainComponent extends Component
         }
     }
 
-    public function emitUpdateEvent($id)
-    {
-        $this->emit('updateMyId', $id);
-        $this->emit('openModal');
-    }
-
     public function render()
     {
-        return view('livewire.web-scrapping.main-component', [
-            'datas' => ScrappedData::paginate(10),
-        ]);
+        return view('livewire.web-scrapping.main-component');
     }
 }

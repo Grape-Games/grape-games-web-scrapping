@@ -9,6 +9,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class CurrenciesTable extends DataTableComponent
 {
+    protected $listeners = ['updateCurrenciesTable' => '$refresh'];
     public function columns(): array
     {
         return [
