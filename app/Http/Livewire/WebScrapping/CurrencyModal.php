@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\WebScrapping;
 
 use App\Models\CurrencyRate;
+use App\Models\ScrappedData;
 use Livewire\Component;
 
 class CurrencyModal extends Component
@@ -17,8 +18,8 @@ class CurrencyModal extends Component
 
     public function finalTouch($value)
     {
-        CurrencyRate::where('id', $value)->update([
-            'scrapped_data_id' => $this->toUpdate
+        ScrappedData::where('id', $this->toUpdate)->update([
+            'currency_rate_id' => $value
         ]);
         $this->emit('toggleModal');
     }

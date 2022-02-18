@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('country_name');
             $table->string('price');
+            $table->foreignId('currency_rate_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignUuid('scrap_detail_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

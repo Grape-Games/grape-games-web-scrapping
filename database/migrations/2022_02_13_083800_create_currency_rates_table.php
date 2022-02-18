@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('usd_per_unit');
             $table->string('dated');
             $table->string('url');
-            $table->foreignId('scrapped_data_id')->nullable()->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

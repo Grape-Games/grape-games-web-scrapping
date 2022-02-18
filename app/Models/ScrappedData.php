@@ -5,15 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ScrappedData extends Model
 {
     use HasFactory;
     protected $table = "scrapped_datas";
+
     protected $fillable = [
         'country_name',
         'price',
+        'currency_rate_id',
         'scrap_detail_id',
     ];
 
@@ -28,12 +29,12 @@ class ScrappedData extends Model
     }
 
     /**
-     * Get the rate associated with the ScrappedData
+     * Get the rate that owns the ScrappedData
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function rate(): HasOne
+    public function rate(): BelongsTo
     {
-        return $this->hasOne(CurrencyRate::class);
+        return $this->belongsTo(CurrencyRate::class, 'currency_rate_id', 'id');
     }
 }
