@@ -8,6 +8,7 @@ use App\Models\ScrappedData;
 use App\Traits\CustomStringTrait;
 use Carbon\Carbon;
 use Goutte\Client;
+use MenaraSolutions\Geographer\Earth;
 
 class PetrolPricesScrappingService
 {
@@ -19,7 +20,8 @@ class PetrolPricesScrappingService
             return $node->text();
         });
         $countries = $crawler->filter('.graph_outside_link')->each(function ($node) {
-            return $node->text();
+            $str = trim(html_entity_decode($node->text()), " \t\n\r\0\x0B\xC2\xA0");
+            return str_replace("*", '', $str);
         });
         $prices = $crawler->filter('#graphic')->each(function ($node) {
             return $node->text();
@@ -92,6 +94,8 @@ class PetrolPricesScrappingService
 
     public static function store(array $data, $url)
     {
+        $earth = new Earth();
+
         $date = trim(self::get_string_between($data['dated'][0], ",", "("));
         $create = ScrapDetail::firstOrCreate([
             'details' => $data['dated'][0],
@@ -100,13 +104,23 @@ class PetrolPricesScrappingService
         ]);
 
         foreach ($data['countries'] as $key => $country) {
-            ScrappedData::updateOrCreate([
+            $head = ScrappedData::updateOrCreate([
                 'country_name' => $country,
             ], [
                 'country_name' => $country,
                 'price' => $data['prices'][$key],
                 'scrap_detail_id' => $create->id
             ]);
+
+            // start mapping relevant currency
+            $map =  $earth->findOne(['name' => $country]);
+
+            if ($map) {
+                $row = CurrencyRate::where('symbol', $map->currency)->first();
+
+                if ($row)
+                    $head->update(['currency_rate_id' => $row->id]);
+            }
         }
         return true;
     }

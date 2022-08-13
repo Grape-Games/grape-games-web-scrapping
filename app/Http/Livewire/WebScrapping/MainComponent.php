@@ -11,6 +11,7 @@ use Goutte\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Livewire\WithPagination;
+use Symfony\Component\HttpClient\HttpClient;
 
 class MainComponent extends Component
 {
@@ -31,7 +32,7 @@ class MainComponent extends Component
         $this->validate();
         try {
             DB::beginTransaction();
-            $client = new Client();
+            $client = new Client(HttpClient::create(['verify_peer' => false]));
             if ($client) {
                 $this->emit('response-toast', $this->successMessage("Successfully created a client to the url.", "✅"));
 
