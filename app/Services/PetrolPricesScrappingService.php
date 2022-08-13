@@ -107,14 +107,13 @@ class PetrolPricesScrappingService
             $head = ScrappedData::updateOrCreate([
                 'country_name' => $country,
             ], [
-                'country_name' => $country,
                 'price' => $data['prices'][$key],
                 'scrap_detail_id' => $create->id
             ]);
 
             // start mapping relevant currency
-            $map =  $earth->findOne(['name' => $country]);
-
+            $map =  $earth->findOne(['name' => 'Nigeria']);
+            dd($map->toArray());
             if ($map) {
                 $row = CurrencyRate::where('symbol', $map->currency)->first();
 
@@ -132,8 +131,6 @@ class PetrolPricesScrappingService
                 'country' => $currency['country'],
                 'symbol' => $currency['symbol'],
             ], [
-                'country' => $currency['country'],
-                'symbol' => $currency['symbol'],
                 'units_per_usd' => $currency['units_per_usd'],
                 'usd_per_unit' => $currency['usd_per_unit'],
                 'dated' => $dated,
