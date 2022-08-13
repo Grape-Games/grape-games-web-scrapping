@@ -22,7 +22,7 @@ class ResourcesService
         $this->scrapSites['heating_oil'] = 'https://www.globalpetrolprices.com/heating_oil_prices/';
     }
 
-    public function execute($type = 'no')
+    public function execute($type = 'default')
     {
         $resultant = [];
 

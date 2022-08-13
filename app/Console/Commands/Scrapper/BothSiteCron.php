@@ -2,11 +2,13 @@
 
 namespace App\Console\Commands\Scrapper;
 
-use App\Services\PetrolPricesScrappingService;
+use App\Actions\MapPivotsAction;
+use App\Services\CountryService;
+use App\Services\ExchangeRateService;
+use App\Services\ResourcesService;
 use Exception;
-use Goutte\Client;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BothSiteCron extends Command
 {
@@ -22,7 +24,7 @@ class BothSiteCron extends Command
      *
      * @var string
      */
-    protected $description = 'This command scraps the data from both sites and updates in the database.';
+    protected $description = 'This command scraps the data from forex and global prices sites and updates in the database.';
 
     /**
      * Create a new command instance.
@@ -39,34 +41,22 @@ class BothSiteCron extends Command
      *
      * @return int
      */
-    public function handle()
-    {
+    public function handle(
+        ResourcesService $resourcesService,
+        ExchangeRateService $exchangeService,
+        CountryService $countryService,
+        MapPivotsAction $action,
+    ) {
         try {
-            DB::beginTransaction();
-            $client = new Client();
-            if ($client) {
-                $result = PetrolPricesScrappingService::scrapNow($client, 'https://www.globalpetrolprices.com/gasoline_prices/');
+            $countryService->populateDatabase();
+            $exchangeService->execute();
+            $resourcesService->execute();
+            $action->execute();
 
-                if (count($result['prices']) != count($result['countries'])) {
-                    $this->emit('response-toast', $this->errorMessage("Count of Countries and Prices are not equal."));
-                    return;
-                }
-                // store now
-                if (PetrolPricesScrappingService::store($result, 'https://www.globalpetrolprices.com/gasoline_prices/'))
-                    DB::commit();
-
-                // scrap first
-                $result = PetrolPricesScrappingService::scrapNowRates($client, 'https://www.forex.pk/foreign-exchange-rate.htm');
-
-                // store now
-                if (PetrolPricesScrappingService::storeRates($result['final'], $result['dated'], 'https://www.forex.pk/foreign-exchange-rate.htm'))
-                    DB::commit();
-
-                $this->info('executed successfully.');
-            }
+            $this->info('Refreshed site data successfully.');
         } catch (Exception $exception) {
-            DB::rollBack();
             $this->info($exception->getMessage());
+            Log::info("Cron job failure : " . $exception->getMessage());
         }
         return 0;
     }
