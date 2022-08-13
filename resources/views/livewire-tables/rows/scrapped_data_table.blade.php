@@ -15,28 +15,25 @@
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
-    {{ $row->gasoline_price }}
+    <p>{{ $row->gasoline_price }} USD</p>
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
     @isset($row->rate)
-        {{ $row->rate->units_per_usd }} {{ $row->rate->symbol }}
-        <button wire:click="emitUpdateEvent('{{ $row->id }}')" wire:loading.attr="disabled" wire:loading.remove
-            type="button" class="badge bg-info ml-2"><i class="fas fa-edit"></i>
-        </button>
-        <div class="badge bg-info ml-2" wire:loading wire:target="emitUpdateEvent('{{ $row->id }}')">
-            Loading Please wait...
-        </div>
+        <p>{{ $row->rate->units_per_usd }} {{ $row->rate->symbol }}</p>
     @else
-        <button wire:click="emitUpdateEvent('{{ $row->id }}')" wire:loading.attr="disabled" wire:loading.remove
-            type="button" class="badge bg-danger ml-2"><i class="fas fa-plus"></i>
-        </button>
-        <div class="badge bg-info ml-2" wire:loading wire:target="emitUpdateEvent('{{ $row->id }}')">
-            Loading Please wait...
-        </div>
+        <p class="text-danger">UN-MAPPED</p>
     @endisset
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
-    {{ $row->info->details }}
+    <button wire:click.prevent="emitUpdateEvent('{{ $row->id }}')" wire:loading.attr="disabled"
+        class="badge @isset($row->rate) bg-info @else bg-danger @endisset">
+        <span wire:loading.remove wire:target="emitUpdateEvent('{{ $row->id }}')">
+            <i class="fas @isset($row->rate) fa-edit @else fa-plus @endisset"></i>
+        </span>
+        <span class="d-none" wire:loading.class.remove="d-none" wire:target="emitUpdateEvent('{{ $row->id }}')">
+            <span class="spinner-border spinner-border-sm btn-spinner"></span>
+        </span>
+    </button>
 </x-livewire-tables::bs5.table.cell>

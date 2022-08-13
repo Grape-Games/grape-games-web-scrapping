@@ -17,19 +17,8 @@ class ScrappedData extends Model
         'code3',
         'phone_prefix',
         'gasoline_price',
-        'currency_rate_id',
         'scrap_detail_id',
     ];
-
-    /**
-     * Get the details that owns the ScrappedData
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function info(): BelongsTo
-    {
-        return $this->belongsTo(ScrapDetail::class, 'scrap_detail_id', 'id');
-    }
 
     /**
      * Get the rate that owns the ScrappedData

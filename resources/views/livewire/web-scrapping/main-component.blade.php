@@ -1,30 +1,22 @@
 <div>
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
-    <form novalidate>
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="https://www.globalpetrolprices.com/gasoline_prices/"
-                disabled>
-        </div>
-        <button wire:click.prevent="scrapNow" wire:loading.attr="disabled" type="submit" class="btn btn-primary mt-4">
-            <span wire:loading.remove wire:target="scrapNow">Start Scrapping</span>
-            <span class="d-none" wire:loading.class.remove="d-none" wire:target="scrapNow">
-                Scrapping...
-                <span class="spinner-border spinner-border-sm btn-spinner ml-2 mr-2" role="status" aria-hidden="true">
-                </span>
+
+    <button wire:click.prevent="scrapNow" wire:loading.attr="disabled" type="submit" class="btn btn-primary">
+        <span wire:loading.remove wire:target="scrapNow">Start Scrapping</span>
+        <span class="d-none" wire:loading.class.remove="d-none" wire:target="scrapNow">
+            Scrapping...
+            <span class="spinner-border spinner-border-sm btn-spinner ml-2 mr-2" role="status" aria-hidden="true">
             </span>
-        </button>
-    </form>
+        </span>
+    </button>
 
     <div class="mt-4">
-        @livewire('scrapped-data-table')
+        @livewire('tables.resources-table')
     </div>
 
     @livewire('web-scrapping.currency-modal')
 </div>
 
 @push('extended-js')
-    <script src="{{ asset('js/front/web-scrapping/events.js') }}"></script>
     <script>
         Livewire.on('openModal', () => {
             $(".modal").modal('show');

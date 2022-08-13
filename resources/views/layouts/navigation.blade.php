@@ -5,15 +5,15 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('prices.index') }}">
+                    <a href="{{ route('prices.gasoline') }}">
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('prices.index')" :active="request()->routeIs('prices.index')">
-                        {{ __('Pirces List') }}
+                    <x-nav-link :href="route('prices.gasoline')" :active="request()->routeIs('prices.gasoline')">
+                        {{ __('Gasoline Prices') }}
                     </x-nav-link>
                     <x-nav-link :href="route('currency-rates.index')" :active="request()->routeIs('currency-rates.index')">
                         {{ __('Currency Rates') }}
@@ -74,7 +74,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('prices.index')" :active="request()->routeIs('prices.index')">
+            <x-responsive-nav-link :href="route('prices.gasoline')" :active="request()->routeIs('prices.gasoline')">
                 {{ __('Prices Table') }}
             </x-responsive-nav-link>
         </div>

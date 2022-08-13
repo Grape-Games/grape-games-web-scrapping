@@ -13,15 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('scrapped_datas', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('country_name');
-            $table->string('code')->nullable();
+            $table->string('name');
+            $table->string('code');
             $table->string('code3')->nullable();
+            $table->string('currency')->nullable();
             $table->string('phone_prefix')->nullable();
-            $table->string('gasoline_price');
-            $table->foreignId('currency_rate_id')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignUuid('scrap_detail_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scrapped_data');
+        Schema::dropIfExists('countries');
     }
 };

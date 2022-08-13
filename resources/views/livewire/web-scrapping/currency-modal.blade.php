@@ -41,6 +41,7 @@
                     progressBar: true,
                 };
                 toastr.success('Successfully set the corresponding currency 😉');
+
             });
             Livewire.on('toggleModal', () => {
                 $(".modal").modal('hide');

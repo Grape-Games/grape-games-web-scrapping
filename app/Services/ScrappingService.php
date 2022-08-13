@@ -3,14 +3,10 @@
 namespace App\Services;
 
 use App\Models\CurrencyRate;
-use App\Models\ScrapDetail;
-use App\Models\ScrappedData;
 use App\Traits\CustomStringTrait;
-use Carbon\Carbon;
 use Goutte\Client;
-use MenaraSolutions\Geographer\Earth;
 
-class PetrolPricesScrappingService
+class ScrappingService
 {
     use CustomStringTrait;
 
@@ -91,57 +87,5 @@ class PetrolPricesScrappingService
             'dated' => $dated,
             'final' => $final,
         ];
-    }
-
-    public static function store(array $data, $url)
-    {
-        $earth = new Earth();
-
-        $date = trim(self::get_string_between($data['dated'][0], ",", "("));
-        $create = ScrapDetail::firstOrCreate([
-            'details' => $data['dated'][0],
-            'dated' => Carbon::parse($date)->format('Y-m-d'),
-            'url' => $url,
-        ]);
-
-        foreach ($data['countries'] as $key => $country) {
-            // start mapping relevant currency
-            if ($country == 'USA') $country = 'United States';
-            $map =  $earth->findOne(['name' => $country]);
-
-            $head = ScrappedData::updateOrCreate([
-                'country_name' => $country,
-            ], [
-                'code' => $map ? $map->code : null,
-                'code3' => $map ? $map->code3 : null,
-                'phone_prefix' => $map ? $map->phonePrefix : null,
-                'gasoline_price' => $data['prices'][$key],
-                'scrap_detail_id' => $create->id
-            ]);
-
-            if ($map) {
-                $row = CurrencyRate::where('symbol', $map->currency)->first();
-
-                if ($row)
-                    $head->update(['currency_rate_id' => $row->id]);
-            }
-        }
-        return true;
-    }
-
-    public static function storeRates(array $currencies, $dated, $url)
-    {
-        foreach ($currencies as $currency) {
-            CurrencyRate::updateOrCreate([
-                'country' => $currency['country'],
-                'symbol' => $currency['symbol'],
-            ], [
-                'units_per_usd' => $currency['units_per_usd'],
-                'usd_per_unit' => $currency['usd_per_unit'],
-                'dated' => $dated,
-                'url' => $url
-            ]);
-        }
-        return true;
     }
 }

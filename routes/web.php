@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 // routes
 Route::middleware('auth')->group(function () {
-    Route::view('/prices-list', 'pages.prices.index')->middleware(['auth'])->name('prices.index');
+    Route::view('/gasoline-price-list', 'pages.resources.gasoline')->middleware(['auth'])->name('prices.gasoline');
     Route::view('/currency-rates', 'pages.currency-rates.index')->name('currency-rates.index');
 });
 

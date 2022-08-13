@@ -3,7 +3,8 @@
 namespace App\Http\Livewire\CurrencyRates;
 
 use App\Models\CurrencyRate;
-use App\Services\PetrolPricesScrappingService;
+use App\Services\ExchangeRateService;
+use App\Services\ScrappingService;
 use App\Traits\EventDispatchMessages;
 use Exception;
 use Goutte\Client;
@@ -14,24 +15,19 @@ use Livewire\WithPagination;
 class MainComponent extends Component
 {
     use EventDispatchMessages, WithPagination;
-    public $url = 'https://forex.pk/foreign-exchange-rate.htm';
 
-    public function scrapNow()
+    public function scrapNow(ExchangeRateService $exchangeService)
     {
         try {
             DB::beginTransaction();
-            $client = new Client();
-            if ($client) {
-                // scrap first
-                $result = PetrolPricesScrappingService::scrapNowRates($client, $this->url);
 
-                // store now
-                if (PetrolPricesScrappingService::storeRates($result['final'], $result['dated'], $this->url))
-                    DB::commit();
-
+            if ($exchangeService->execute()) {
+                DB::commit();
                 $this->emit('response-toast', $this->successMessage("Scrapping was done successfully ✅", "✅"));
-                $this->emit('updateCurrenciesTable');
+                $this->emit('dt');
             }
+
+            $this->emit('response-toast', $this->errorMessage("Failed to scrap exchange rates."));
         } catch (Exception $exception) {
             DB::rollBack();
             $this->emit('response-toast', $this->exceptionMessage($exception));

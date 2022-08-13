@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Country;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,12 +14,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('currency_rates', function (Blueprint $table) {
+        Schema::create('resources', function (Blueprint $table) {
             $table->id();
-            $table->string('country');
-            $table->string('symbol');
-            $table->string('units_per_usd');
-            $table->string('usd_per_unit');
+            $table->string('price');
+            $table->string('type');
+            $table->foreignIdFor(Country::class)->constrained();
             $table->string('dated');
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('currency_rates');
+        Schema::dropIfExists('resources');
     }
 };

@@ -29,7 +29,7 @@
 
         <!-- Page Heading -->
         <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="d-flex justify-content-between max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 {{ $header }}
             </div>
         </header>
@@ -44,6 +44,7 @@
     <script src="{{ asset('js/libs/popper.min.js') }}"></script>
     <script src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/libs/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/front/web-scrapping/events.js') }}"></script>
     @stack('extended-js')
 </body>
 

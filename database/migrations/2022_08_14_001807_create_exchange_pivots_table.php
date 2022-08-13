@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Country;
+use App\Models\CurrencyRate;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,11 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('scrap_details', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('url');
-            $table->string('details');
-            $table->string('dated');
+        Schema::create('exchange_pivots', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Country::class)->constrained();
+            $table->foreignIdFor(CurrencyRate::class)->constrained();
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scrap_details');
+        Schema::dropIfExists('exchange_pivots');
     }
 };
