@@ -3,12 +3,8 @@
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
     <form novalidate>
         <div class="form-group">
-            <input wire:model.lazy="url" type="text" class="form-control @error('url') is-invalid @enderror"
-                placeholder="https://www.globalpetrolprices.com/gasoline_prices/"
-                value="https://www.globalpetrolprices.com/gasoline_prices/">
-            @error('url')
-                <span class="text-danger"><strong>{{ $message }}</strong></span>
-            @enderror
+            <input type="text" class="form-control" placeholder="https://www.globalpetrolprices.com/gasoline_prices/"
+                disabled>
         </div>
         <div wire:loading wire:target="scrapNow">
             <h4 class="text-success mt-2"><strong>Scrapping Now Please wait...</strong>

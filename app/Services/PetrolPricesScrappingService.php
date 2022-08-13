@@ -13,6 +13,7 @@ use MenaraSolutions\Geographer\Earth;
 class PetrolPricesScrappingService
 {
     use CustomStringTrait;
+
     public static function scrapNow(Client $client, $url)
     {
         $crawler = $client->request('GET', $url);
@@ -104,15 +105,19 @@ class PetrolPricesScrappingService
         ]);
 
         foreach ($data['countries'] as $key => $country) {
+            // start mapping relevant currency
+            if ($country == 'USA') $country = 'United States';
+            $map =  $earth->findOne(['name' => $country]);
+
             $head = ScrappedData::updateOrCreate([
                 'country_name' => $country,
             ], [
+                'code' => $map ? $map->code : null,
+                'code3' => $map ? $map->code3 : null,
+                'phone_prefix' => $map ? $map->phonePrefix : null,
                 'gasoline_price' => $data['prices'][$key],
                 'scrap_detail_id' => $create->id
             ]);
-
-            // start mapping relevant currency
-            $map =  $earth->findOne(['name' => $country]);
 
             if ($map) {
                 $row = CurrencyRate::where('symbol', $map->currency)->first();

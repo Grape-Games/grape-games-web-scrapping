@@ -14,20 +14,10 @@ use Livewire\WithPagination;
 class MainComponent extends Component
 {
     use EventDispatchMessages, WithPagination;
-    public $url;
-
-    protected $rules = [
-        'url' => 'required|url',
-    ];
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
+    public $url = 'https://forex.pk/foreign-exchange-rate.htm';
 
     public function scrapNow()
     {
-        $this->validate();
         try {
             DB::beginTransaction();
             $client = new Client();

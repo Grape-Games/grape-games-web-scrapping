@@ -17,17 +17,10 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::view('/dashboard', 'dashboard')->middleware(['auth'])->name('dashboard');
-
-
-Route::group([
-    'middleware' => 'auth',
-    'prefix' => 'dashboard/',
-    'as' => 'dashboard.'
-], function () {
-
-    // one curreny rates route
-    Route::view('currency-rates', 'pages.currency-rates.index')->name('currency-rates.index');
+// routes
+Route::middleware('auth')->group(function () {
+    Route::view('/prices-list', 'pages.prices.index')->middleware(['auth'])->name('prices.index');
+    Route::view('/currency-rates', 'pages.currency-rates.index')->name('currency-rates.index');
 });
 
 

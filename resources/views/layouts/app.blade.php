@@ -13,7 +13,11 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     <script defer src="{{ mix('js/app.js') }}"></script>
-
+    <style>
+        a {
+            text-decoration: auto !important;
+        }
+    </style>
     @livewireStyles
     @livewireScripts
     @stack('extended-css')

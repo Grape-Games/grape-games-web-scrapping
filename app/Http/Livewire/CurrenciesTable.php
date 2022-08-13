@@ -12,7 +12,7 @@ class CurrenciesTable extends DataTableComponent
     protected $listeners = ['updateCurrenciesTable' => '$refresh'];
     public function columns(): array
     {
-        return [
+        return [    
             Column::make('Country Name', 'country')
                 ->sortable()
                 ->searchable(),
@@ -26,9 +26,6 @@ class CurrenciesTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make('Dated', 'dated')
-                ->sortable()
-                ->searchable(),
-            Column::make('Website', 'url')
                 ->sortable()
                 ->searchable(),
         ];

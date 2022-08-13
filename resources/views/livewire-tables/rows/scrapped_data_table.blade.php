@@ -3,9 +3,20 @@
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
-    {{ $row->gasoline_price }}
+    {{ $row->code ?? '-' }}
 </x-livewire-tables::bs5.table.cell>
 
+<x-livewire-tables::bs5.table.cell>
+    {{ $row->code3 ?? '-' }}
+</x-livewire-tables::bs5.table.cell>
+
+<x-livewire-tables::bs5.table.cell>
+    {{ $row->phone_prefix ?? '-' }}
+</x-livewire-tables::bs5.table.cell>
+
+<x-livewire-tables::bs5.table.cell>
+    {{ $row->gasoline_price }}
+</x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
     @isset($row->rate)
@@ -28,12 +39,4 @@
 
 <x-livewire-tables::bs5.table.cell>
     {{ $row->info->details }}
-</x-livewire-tables::bs5.table.cell>
-
-<x-livewire-tables::bs5.table.cell>
-    {{ $row->info->dated }}
-</x-livewire-tables::bs5.table.cell>
-
-<x-livewire-tables::bs5.table.cell>
-    {{ $row->info->url }}
 </x-livewire-tables::bs5.table.cell>

@@ -27,7 +27,16 @@ class ScrappedDataTable extends DataTableComponent
             Column::make("Country name", "country_name")
                 ->searchable()
                 ->sortable(),
-            Column::make("Gasoline ( USD )", "gasoline_price")
+            Column::make("Code", "code")
+                ->searchable()
+                ->sortable(),
+            Column::make("Code3", "code3")
+                ->searchable()
+                ->sortable(),
+            Column::make("Phone Prefix", "phone_prefix")
+                ->searchable()
+                ->sortable(),
+            Column::make("Gasoline", "gasoline_price")
                 ->searchable()
                 ->sortable(),
             Column::make("Conversion Rate", "rate.units_per_usd")
@@ -35,10 +44,6 @@ class ScrappedDataTable extends DataTableComponent
                 ->sortable(),
             Column::make("Type", "info.details")
                 ->searchable()
-                ->sortable(),
-            Column::make("Dated", "info.dated")
-                ->sortable(),
-            Column::make("URL", "info.url")
                 ->sortable(),
 
         ];
@@ -51,7 +56,6 @@ class ScrappedDataTable extends DataTableComponent
 
     public function rowView(): string
     {
-        // Becomes /resources/views/location/to/my/row.blade.php
         return 'livewire-tables.rows.scrapped_data_table';
     }
 }
