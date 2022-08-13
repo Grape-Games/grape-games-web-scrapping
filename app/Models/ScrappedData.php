@@ -13,7 +13,7 @@ class ScrappedData extends Model
 
     protected $fillable = [
         'country_name',
-        'price',
+        'gasoline_price',
         'currency_rate_id',
         'scrap_detail_id',
     ];
