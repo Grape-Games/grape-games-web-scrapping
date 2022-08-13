@@ -12,11 +12,29 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('prices.gasoline')" :active="request()->routeIs('prices.gasoline')">
-                        {{ __('Gasoline Prices') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('currency-rates.index')" :active="request()->routeIs('currency-rates.index')">
                         {{ __('Currency Rates') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.gasoline')" :active="request()->routeIs('prices.gasoline')">
+                        {{ __('Gasoline') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.diesel')" :active="request()->routeIs('prices.diesel')">
+                        {{ __('Diesel') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.lpg')" :active="request()->routeIs('prices.lpg')">
+                        {{ __('LPG') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.eletricity')" :active="request()->routeIs('prices.eletricity')">
+                        {{ __('Electricity') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.natural-gas')" :active="request()->routeIs('prices.natural-gas')">
+                        {{ __('Natural Gas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.kerosine-oil')" :active="request()->routeIs('prices.kerosine-oil')">
+                        {{ __('Kerosene Oil') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('prices.heating-oil')" :active="request()->routeIs('prices.heating-oil')">
+                        {{ __('Heating Oil') }}
                     </x-nav-link>
                 </div>
             </div>
