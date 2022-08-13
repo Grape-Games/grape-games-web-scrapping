@@ -16,7 +16,7 @@ class MapPivotsAction
             $record = $rates->where('symbol', $country->currency)->first();
 
             if (!$record)
-                $record = $rates->where('country', 'LIKE', $country->name)->first();
+                $record = $rates->where('country', 'LIKE', "%$country->name%")->first();
 
             if ($record) {
                 $country->pivot()->updateOrCreate(['currency_rate_id' => $record->id]);
