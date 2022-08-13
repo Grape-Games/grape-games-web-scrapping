@@ -107,7 +107,7 @@ class PetrolPricesScrappingService
             $head = ScrappedData::updateOrCreate([
                 'country_name' => $country,
             ], [
-                'price' => $data['prices'][$key],
+                'gasoline_price' => $data['prices'][$key],
                 'scrap_detail_id' => $create->id
             ]);
 

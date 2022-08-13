@@ -27,7 +27,7 @@ class ScrappedDataTable extends DataTableComponent
             Column::make("Country name", "country_name")
                 ->searchable()
                 ->sortable(),
-            Column::make("Price ( USD )", "price")
+            Column::make("Gasoline ( USD )", "gasoline_price")
                 ->searchable()
                 ->sortable(),
             Column::make("Conversion Rate", "rate.units_per_usd")

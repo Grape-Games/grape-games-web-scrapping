@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('scrapped_datas', function (Blueprint $table) {
             $table->id();
             $table->string('country_name');
-            $table->string('price');
+            $table->string('gasoline_price');
             $table->foreignId('currency_rate_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignUuid('scrap_detail_id')->constrained()->onDelete('cascade');
             $table->timestamps();
