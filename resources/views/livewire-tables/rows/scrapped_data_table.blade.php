@@ -3,7 +3,7 @@
 </x-livewire-tables::bs5.table.cell>
 
 <x-livewire-tables::bs5.table.cell>
-    {{ $row->price }}
+    {{ $row->gasoline_price }}
 </x-livewire-tables::bs5.table.cell>
 
 
