@@ -24,24 +24,22 @@ class MainComponent extends Component
             DB::beginTransaction();
             $client = new Client(HttpClient::create(['verify_peer' => false]));
             if ($client) {
-                $this->emit('response-toast', $this->successMessage("Successfully created a client to the url.", "✅"));
-
                 // scrap first
                 $result = PetrolPricesScrappingService::scrapNow($client, $this->url);
 
                 if (count($result['prices']) != count($result['countries'])) {
-                    $this->emit('response-toast', $this->errorMessage("Count of Countries and Prices are not equal."));
+                    $this->emit('response-toast', $this->errorMessage("Count of countries and prices is not equal."));
                     return;
                 }
                 // store now
                 if (PetrolPricesScrappingService::store($result, $this->url))
                     DB::commit();
 
-                $this->emit('response-toast', $this->successMessage("Scrapping was done successfully ✅", "✅"));
+                $this->emit('response-toast', $this->successMessage("Scrapping and mapping was done successfully. ✅", "✅"));
                 $this->emit('updateScrappedData');
             } else {
                 DB::rollBack();
-                throw ValidationException::withMessages(['URL' => 'Failed to set up the Goutte Client. 😞']);
+                throw ValidationException::withMessages(['URL' => 'Failed to set up the crawler. 😞']);
             }
         } catch (Exception $exception) {
             DB::rollBack();

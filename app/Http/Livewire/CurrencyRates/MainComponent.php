@@ -22,8 +22,6 @@ class MainComponent extends Component
             DB::beginTransaction();
             $client = new Client();
             if ($client) {
-                $this->emit('response-toast', $this->successMessage("Successfully created a client to the url.", "✅"));
-
                 // scrap first
                 $result = PetrolPricesScrappingService::scrapNowRates($client, $this->url);
 
