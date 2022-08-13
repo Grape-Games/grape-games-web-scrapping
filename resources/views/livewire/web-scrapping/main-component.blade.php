@@ -17,22 +17,23 @@
         </div>
         <div class="form-group">
             <button wire:click.prevent="scrapNow" wire:loading.attr="disabled" type="button"
-                class="btn btn-primary mt-2">Scrap
-                Now</button>
+                class="btn btn-primary mt-2">Scrap Now
+            </button>
         </div>
     </form>
 
-    @livewire('scrapped-data-table')
+    <div class="mt-4">
+        @livewire('scrapped-data-table')
+    </div>
 
     @livewire('web-scrapping.currency-modal')
 </div>
-@once
-    @push('extended-js')
-        <script src="{{ asset('js/front/web-scrapping/events.js') }}"></script>
-        <script>
-            Livewire.on('openModal', () => {
-                $(".modal").modal('show');
-            });
-        </script>
-    @endpush
-@endonce
+
+@push('extended-js')
+    <script src="{{ asset('js/front/web-scrapping/events.js') }}"></script>
+    <script>
+        Livewire.on('openModal', () => {
+            $(".modal").modal('show');
+        });
+    </script>
+@endpush

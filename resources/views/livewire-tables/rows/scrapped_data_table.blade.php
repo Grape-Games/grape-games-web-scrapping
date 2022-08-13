@@ -11,16 +11,16 @@
     @isset($row->rate)
         {{ $row->rate->units_per_usd }} {{ $row->rate->symbol }}
         <button wire:click="emitUpdateEvent('{{ $row->id }}')" wire:loading.attr="disabled" wire:loading.remove
-            type="button" class="bx-flashing badge badge-info ml-2"><i class="fas fa-edit"></i>
+            type="button" class="badge bg-info ml-2"><i class="fas fa-edit"></i>
         </button>
-        <div class="bx-flashing badge badge-info ml-2" wire:loading wire:target="emitUpdateEvent('{{ $row->id }}')">
+        <div class="badge bg-info ml-2" wire:loading wire:target="emitUpdateEvent('{{ $row->id }}')">
             Loading Please wait...
         </div>
     @else
         <button wire:click="emitUpdateEvent('{{ $row->id }}')" wire:loading.attr="disabled" wire:loading.remove
-            type="button" class="bx-flashing badge badge-danger ml-2"><i class="fas fa-plus"></i>
+            type="button" class="badge bg-danger ml-2"><i class="fas fa-plus"></i>
         </button>
-        <div class="bx-flashing badge badge-info ml-2" wire:loading wire:target="emitUpdateEvent('{{ $row->id }}')">
+        <div class="badge bg-info ml-2" wire:loading wire:target="emitUpdateEvent('{{ $row->id }}')">
             Loading Please wait...
         </div>
     @endisset

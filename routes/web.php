@@ -17,6 +17,8 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
+Route::view('/dashboard', 'dashboard')->middleware(['auth'])->name('dashboard');
+
 
 Route::group([
     'middleware' => 'auth',
@@ -28,8 +30,5 @@ Route::group([
     Route::view('currency-rates', 'pages.currency-rates.index')->name('currency-rates.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
