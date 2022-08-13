@@ -112,8 +112,8 @@ class PetrolPricesScrappingService
             ]);
 
             // start mapping relevant currency
-            $map =  $earth->findOne(['name' => 'Nigeria']);
-            dd($map->toArray());
+            $map =  $earth->findOne(['name' => $country]);
+
             if ($map) {
                 $row = CurrencyRate::where('symbol', $map->currency)->first();
 
