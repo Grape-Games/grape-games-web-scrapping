@@ -13,7 +13,7 @@
              </li>
              <li>
                  <a href="{{ route('dashboard') }}" class="ai-icon" aria-expanded="false">
-                     <i class="flaticon-025-dashboard"></i>
+                    <i class="fa-solid fa-gauge"></i>
                      <span class="nav-text">Dashboard</span>
                  </a>
              </li>
