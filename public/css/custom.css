@@ -1,0 +1,24 @@
+/* custom css */
+
+.loader {
+    color: #fff !important;
+    margin-bottom: 4px;
+}
+
+.is-invalid {
+    border-right: -1px !important;
+}
+
+p,
+td,
+thead {
+    color: black !important;
+}
+
+.ps__rail-y {
+    background: transparent !important;
+}
+
+.ps__thumb-y {
+    width: 7px !important;
+}

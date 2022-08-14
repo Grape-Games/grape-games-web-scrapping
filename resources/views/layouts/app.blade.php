@@ -3,47 +3,65 @@
 
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="robots" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
-
-    <!-- Styles -->
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <script defer src="{{ mix('js/app.js') }}"></script>
-    <style>
-        a {
-            text-decoration: auto !important;
-        }
-    </style>
+    <!-- PAGE TITLE HERE -->
+    <title>{{ config('app.name') }} | {{ ucwords(last(request()->segments())) }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+    <!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/favicon.png') }}" />
+    <!-- Style css -->
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @livewireStyles
     @livewireScripts
+    @include('vendor.toastr')
     @stack('extended-css')
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+<body>
 
-        <!-- Page Heading -->
-        <header class="bg-white shadow">
-            <div class="d-flex justify-content-between max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
-            </div>
-        </header>
-
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
+    <div id="preloader">
+        <div class="waviy">
+            <span style="--i:1">L</span>
+            <span style="--i:2">o</span>
+            <span style="--i:3">a</span>
+            <span style="--i:4">d</span>
+            <span style="--i:5">i</span>
+            <span style="--i:6">n</span>
+            <span style="--i:7">g</span>
+            <span style="--i:8">.</span>
+            <span style="--i:9">.</span>
+            <span style="--i:10">.</span>
+        </div>
     </div>
 
-    <script src="{{ asset('js/libs/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/libs/popper.min.js') }}"></script>
-    <script src="{{ asset('js/libs/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/libs/toastr.min.js') }}"></script>
+    <div id="main-wrapper">
+
+        @include('partials.navigation')
+        @include('partials.header')
+        @include('partials.sidebar')
+
+        <div class="content-body">
+            <!-- row -->
+            <div class="container-fluid">
+                @yield('content')
+            </div>
+        </div>
+        <!-- Page Content -->
+        @include('partials.footer')
+
+    </div>
+
+    <!-- Required vendors -->
+    <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
+    <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+    <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script>
     <script src="{{ asset('js/front/web-scrapping/events.js') }}"></script>
     @stack('extended-js')
 </body>

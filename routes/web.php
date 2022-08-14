@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 // routes
 Route::middleware('auth')->group(function () {
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
     Route::view('/gasoline-prices-list', 'pages.resources.gasoline')->name('prices.gasoline');
     Route::view('/diesel-prices-list', 'pages.resources.diesel')->name('prices.diesel');
     Route::view('/lpg-prices-list', 'pages.resources.lpg')->name('prices.lpg');

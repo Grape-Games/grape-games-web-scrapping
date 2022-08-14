@@ -4,7 +4,7 @@
         <span wire:loading.remove wire:target="scrapNow">Scrap {{ str_replace('_', ' ', ucwords($type)) }}</span>
         <span class="d-none" wire:loading.class.remove="d-none" wire:target="scrapNow">
             Scrapping...
-            <span class="spinner-border spinner-border-sm btn-spinner ml-2 mr-2" role="status" aria-hidden="true">
+            <span class="spinner-border spinner-border-sm btn-spinner loader">
             </span>
         </span>
     </button>
