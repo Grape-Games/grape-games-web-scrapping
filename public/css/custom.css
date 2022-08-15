@@ -22,3 +22,8 @@ thead {
 .ps__thumb-y {
     width: 7px !important;
 }
+
+.container-fluid .row .col-12 div {
+    overflow: auto;
+    margin-top: 20px;
+}
