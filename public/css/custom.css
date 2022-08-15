@@ -23,7 +23,10 @@ thead {
     width: 7px !important;
 }
 
+.container-fluid .row {
+    margin-top: 20px;
+}
+
 .container-fluid .row .col-12 div {
     overflow: auto;
-    margin-top: 20px;
 }
