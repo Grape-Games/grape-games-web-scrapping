@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Prices\GetPriceRequest;
 use App\Http\Resources\Collections\ResourcesCollection;
+use App\Models\CurrencyRate;
 use App\Models\Resource;
 use App\Traits\JsonifyResponse;
 
@@ -20,5 +21,10 @@ class PriceController extends Controller
             $data,
             message: 'Below are the ' . $request->type . ' rates.'
         );
+    }
+
+    public function getAllPrices()
+    {
+        return $this->success(CurrencyRate::all());
     }
 }

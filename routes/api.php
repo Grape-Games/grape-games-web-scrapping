@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::controller(PriceController::class)->group(function () {
         Route::get('/prices/{type}', 'index');
+        Route::get('/prices', 'getAllPrices');
     });
 });
 
